@@ -1,0 +1,25 @@
+{
+    "name" : "catch-links",
+    "version" : "0.0.0",
+    "description" : "intercept local link clicks on a page",
+    "main" : "index.js",
+    "scripts" : {
+        "test" : "tap test/*.js"
+    },
+    "repository" : {
+        "type" : "git",
+        "url" : "git://github.com/substack/catch-links.git"
+    },
+    "homepage" : "https://github.com/substack/catch-links",
+    "keywords" : [
+        "link",
+        "browser",
+        "click"
+    ],
+    "author" : {
+        "name" : "James Halliday",
+        "email" : "mail@substack.net",
+        "url" : "http://substack.net"
+    },
+    "license" : "MIT"
+}

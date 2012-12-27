@@ -58,6 +58,9 @@ With [npm](https://npmjs.org) do:
 npm install catch-links
 ```
 
+Use [browserify](http://browserify.org) to bundle this library into your
+project.
+
 # license
 
 MIT
