@@ -3,6 +3,11 @@
     "version" : "0.0.0",
     "description" : "intercept local link clicks on a page",
     "main" : "index.js",
+    "devDependencies" : {
+        "tape" : "~0.2.2",
+        "tap" : "~0.4.0",
+        "ever" : "~0.0.3"
+    },
     "scripts" : {
         "test" : "tap test/*.js"
     },

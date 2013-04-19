@@ -10,6 +10,12 @@ module.exports = function (root, cb) {
     
     function onclick (href) {
         return function (ev) {
+            if (this.pathname === window.location.pathname
+            && this.search === window.location.search
+            && this.hash) {
+                return true;
+            }
+            
             if (ev.altKey || ev.ctrlKey || ev.metaKey || ev.shiftKey) {
                 return true;
             }
