@@ -1,27 +1,27 @@
+var url = require('url');
+
 module.exports = function (root, cb) {
-    var links = root.querySelectorAll('a[href]');
-    for (var i = 0; i < links.length; i++) {
-        var link = links[i];
-        var href = link.getAttribute('href');
-        if (/^\/[^.\/]+$/.test(href) || link.host === window.location.host) {
-            link.addEventListener('click', onclick(href));
+    root.addEventListener('click', function (ev) {
+        if (ev.altKey || ev.ctrlKey || ev.metaKey || ev.shiftKey) {
+            return true;
         }
-    }
-    
-    function onclick (href) {
-        return function (ev) {
-            if (this.pathname === window.location.pathname
-            && this.search === window.location.search
-            && this.hash) {
-                return true;
+        
+        var anchor = null;
+        for (var n = ev.target; n.parentNode; n = n.parentNode) {
+            if (n.tagName && n.tagName.toUpperCase() === 'A') {
+                anchor = n;
+                break;
             }
-            
-            if (ev.altKey || ev.ctrlKey || ev.metaKey || ev.shiftKey) {
-                return true;
-            }
-            ev.preventDefault();
-            cb(href);
-            return false;
-        };
-    }
+        }
+        if (!anchor) return true;
+        
+        var href = anchor.getAttribute('href');
+        var u = url.parse(anchor.getAttribute('href'));
+        
+        if (u.host && u.host !== location.host) return true;
+        
+        ev.preventDefault();
+        cb(url.resolve(location.href, href));
+        return false;
+    });
 };

@@ -1,5 +1,5 @@
 var catchLinks = require('../');
 
-catchLinks(document, function (href) {
+catchLinks(window, function (href) {
     console.log(href);
 });
