@@ -34,7 +34,7 @@ link to npmjs.org will go through as usual.
 ``` js
 var catchLinks = require('catch-links');
 
-catchLinks(document, function (href) {
+catchLinks(window, function (href) {
     console.log(href);
 });
 ```

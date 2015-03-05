@@ -1,6 +1,6 @@
 {
   "name": "catch-links",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "intercept local link clicks on a page",
   "main": "index.js",
   "scripts": {
