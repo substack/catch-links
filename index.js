@@ -2,7 +2,7 @@ var url = require('url');
 
 module.exports = function (root, cb) {
     root.addEventListener('click', function (ev) {
-        if (ev.altKey || ev.ctrlKey || ev.metaKey || ev.shiftKey) {
+        if (ev.altKey || ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.defaultPrevented) {
             return true;
         }
         
