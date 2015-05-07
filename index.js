@@ -8,7 +8,7 @@ module.exports = function (root, cb) {
         
         var anchor = null;
         for (var n = ev.target; n.parentNode; n = n.parentNode) {
-            if (n.tagName && n.tagName.toUpperCase() === 'A') {
+            if (n.nodeName === 'A') {
                 anchor = n;
                 break;
             }
