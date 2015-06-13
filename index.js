@@ -1,32 +1,32 @@
 var url = require('url');
 
 module.exports = function (root, cb, rel) {
-    root.addEventListener('click', function (ev) {
-        if (ev.altKey || ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.defaultPrevented) {
-            return true;
-        }
+	root.addEventListener('click', function (ev) {
+		if (ev.altKey || ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.defaultPrevented) {
+			return true;
+		}
 
-        var anchor = null;
-        for (var n = ev.target; n.parentNode; n = n.parentNode) {
-            if (n.nodeName === 'A') {
-                anchor = n;
-                break;
-            }
-        }
-        if (!anchor) return true;
+		var anchor = null;
+		for (var n = ev.target; n.parentNode; n = n.parentNode) {
+			if (n.nodeName === 'A') {
+				anchor = n;
+				break;
+			}
+		}
+		if (!anchor) return true;
 
-        var href = anchor.getAttribute('href');
-        var u = url.parse(anchor.getAttribute('href'));
+		var href = anchor.getAttribute('href');
+		var u = url.parse(anchor.getAttribute('href'));
 
-        if (u.host && u.host !== location.host) return true;
+		if (u.host && u.host !== location.host) return true;
 
-        ev.preventDefault();
+		ev.preventDefault();
 
-        var link = rel === true
-            ? u.path + (u.hash || '')
-            : url.resolve(location.href, href);
+		var link = rel === true
+			? u.path + (u.hash || '')
+			: url.resolve(location.href, href);
 
-        cb(link);
-        return false;
-    });
+		cb(link);
+		return false;
+	});
 };
