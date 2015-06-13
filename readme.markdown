@@ -28,8 +28,7 @@ Given some html:
 </html>
 ```
 
-We'll intercept the relative links `/a` and `/b`, printing them. The external
-link to npmjs.org will go through as usual.
+We'll intercept the relative links `<host>/a` and `<host>/b`, printing them. The external link to npmjs.org will go through as usual.
 
 ``` js
 var catchLinks = require('catch-links');
@@ -45,10 +44,9 @@ catchLinks(window, function (href) {
 var catchLinks = require('catch-links')
 ```
 
-## catchLinks(element, cb)
+## catchLinks(element, cb, [route])
 
-Fire `cb(href)` whenever an anchor tag descendant of `element` with an in-server
-url is clicked.
+Fire `cb(href)` whenever an anchor tag descendant of `element` with an in-server url is clicked. If `route` is `true`, only the route portion of `href` with be passed to `cb`.
 
 # install
 

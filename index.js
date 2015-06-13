@@ -1,11 +1,11 @@
 var url = require('url');
 
-module.exports = function (root, cb) {
+module.exports = function (root, cb, rel) {
     root.addEventListener('click', function (ev) {
         if (ev.altKey || ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.defaultPrevented) {
             return true;
         }
-        
+
         var anchor = null;
         for (var n = ev.target; n.parentNode; n = n.parentNode) {
             if (n.nodeName === 'A') {
@@ -14,14 +14,19 @@ module.exports = function (root, cb) {
             }
         }
         if (!anchor) return true;
-        
+
         var href = anchor.getAttribute('href');
         var u = url.parse(anchor.getAttribute('href'));
-        
+
         if (u.host && u.host !== location.host) return true;
-        
+
         ev.preventDefault();
-        cb(url.resolve(location.href, href));
+
+        var link = rel === true
+            ? u.path + (u.hash || '')
+            : url.resolve(location.href, href);
+
+        cb(link);
         return false;
     });
 };
