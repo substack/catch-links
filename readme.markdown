@@ -20,6 +20,10 @@ Given some html:
     </div>
 
     <div>
+      <a href="cc">cc</a>
+    </div>
+    
+    <div>
       <a href="http://npmjs.org">npmjs</a>
     </div>
     
@@ -28,7 +32,8 @@ Given some html:
 </html>
 ```
 
-We'll intercept the relative links `<host>/a` and `<host>/b`, printing them. The external link to npmjs.org will go through as usual.
+We'll intercept the relative links `<host>/a` and `<host>/b`, printing them.
+The external link to npmjs.org will go through as usual.
 
 ``` js
 var catchLinks = require('catch-links');
@@ -44,9 +49,12 @@ catchLinks(window, function (href) {
 var catchLinks = require('catch-links')
 ```
 
-## catchLinks(element, cb, [route])
+## catchLinks(element, cb)
 
-Fire `cb(href)` whenever an anchor tag descendant of `element` with an in-server url is clicked. If `route` is `true`, only the route portion of `href` with be passed to `cb`.
+Fire `cb(href)` whenever an anchor tag descendant of `element` with an in-server
+url is clicked.
+
+`href` will always be a relative path rooted at the root path.
 
 # install
 
