@@ -24,7 +24,7 @@ module.exports = function (root, cb) {
         
         var base = location.protocol + '//' + location.host;
         
-        cb(url.resolve(location.pathname, u.path) + (u.hash || ''));
+        cb(url.resolve(location.pathname, u.path || '') + (u.hash || ''));
         return false;
     });
 };
