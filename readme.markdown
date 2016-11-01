@@ -38,9 +38,10 @@ The external link to npmjs.org will go through as usual.
 ``` js
 var catchLinks = require('catch-links');
 
-catchLinks(window, function (href) {
-    console.log(href);
-});
+window.addEventListener('click', catchLinks(function (event, anchor) {
+  event.preventDefault();
+  console.log(anchor.href);
+}));
 ```
 
 # methods
@@ -49,12 +50,9 @@ catchLinks(window, function (href) {
 var catchLinks = require('catch-links')
 ```
 
-## catchLinks(element, cb)
+## catchLinks(cb)
 
-Fire `cb(href)` whenever an anchor tag descendant of `element` with an in-server
-url is clicked.
-
-`href` will always be a relative path rooted at the root path.
+Fire `cb(event, anchor)` whenever an anchor tag with an in-server url is clicked.
 
 # install
 
