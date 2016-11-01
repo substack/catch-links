@@ -1,5 +1,5 @@
-module.exports = function (root, cb) {
-    root.addEventListener('click', function (ev) {
+module.exports = function (cb) {    
+    return function (ev) {
         if (ev.altKey || ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.defaultPrevented) {
             return true;
         }
@@ -11,6 +11,7 @@ module.exports = function (root, cb) {
                 break;
             }
         }
+
         if (!anchor) return true;
 
         // IE clears the host value if the anchor href changed after creation, e.g. in React
@@ -31,5 +32,5 @@ module.exports = function (root, cb) {
         
         cb(anchor.href);
         return false;
-    });
+    };
 };
