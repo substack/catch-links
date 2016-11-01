@@ -14,6 +14,8 @@ module.exports = function (root, cb) {
             }
         }
         if (!anchor) return true;
+
+        if (anchor.target && anchor.target.toLowerCase() !== '_self') return;
         
         var href = anchor.getAttribute('href');
         var u = url.parse(anchor.getAttribute('href'));
