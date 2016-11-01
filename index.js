@@ -1,5 +1,3 @@
-var url = require('url');
-
 module.exports = function (root, cb) {
     root.addEventListener('click', function (ev) {
         if (ev.altKey || ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.defaultPrevented) {
@@ -15,16 +13,25 @@ module.exports = function (root, cb) {
         }
         if (!anchor) return true;
         
-        var href = anchor.getAttribute('href');
-        var u = url.parse(anchor.getAttribute('href'));
+        // IE clears the host value if the anchor href changed after creation, e.g. in React
+        // Creating a new anchor element to insure host value is present
+        var a1 = document.createElement('a');
+        a1.href = anchor.href;
         
-        if (u.host && u.host !== location.host) return true;
+        // In IE, the default port is included in the anchor host but excluded from the location host.
+        // This affects the ability to directly compare location host to anchor host.
+        // For example: http://example.com would have a location.host of 'example.com' and an anchor.host of 'example.com:80'
+        // Creating anchor from the location.href to normalize the host value.
+        var a2 = document.createElement('a');
+        a2.href = location.href;
+
+        if (a1.host !== a2.host) return true;
         
         ev.preventDefault();
         
         var base = location.protocol + '//' + location.host;
         
-        cb(url.resolve(location.pathname, u.path || '') + (u.hash || ''));
+        cb(anchor.href);
         return false;
     });
 };
